@@ -1,0 +1,1 @@
+SELECT User_Name_ID FROM `users` where Permissions = 'Yes';
