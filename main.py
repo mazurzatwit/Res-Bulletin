@@ -1,6 +1,7 @@
 import sys
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
 import createForm
 import mysql.connector
 from mysql.connector import Error
@@ -43,8 +44,7 @@ class mainWindow(QMainWindow):
             self.setStyleSheet("background: #FDFD96")
             self.setWindowTitle("Residential Hall Event Bulletin")
             #self.layout = QtWidgets.QGridLayout()
-            label = QLabel()
-            label.setText("PPPPLLLLLEEEAAAASSSSSEEEEEE")
+            
             
             self.groupBox = QGroupBox ("Events")
             gridLayout = QGridLayout()
@@ -86,11 +86,20 @@ class mainWindow(QMainWindow):
             self.createButton.setText('Create')
             self.createButton.setStyleSheet("background: #FF6962")
             self.createButton.clicked.connect(self.createNewEvent)
+            self.createButton.move(1200,25)
+            self.createButton.resize(150,50)
+            self.createButton.setFont(QFont('Tahoma', 25))
 
-            self.Button4 = QtWidgets.QPushButton(self)
-            self.Button4.setText('Hello???????')
-            self.Button4.setStyleSheet("background: #FF6962")
-            self.Button4.move(150,200)
+            self.logo = QLabel(self)
+            pixmap = QPixmap('Res_Logo.jpg')
+            self.logo.resize(100,100)
+            self.logo.setPixmap(pixmap.scaled(100,100))
+            #logo.move(0,0)
+
+            self.appName = QLabel('Residential Hall Event Bulletin', self)
+            self.appName.resize(1000,100)
+            self.appName.move(150, 0)
+            self.appName.setFont(QFont('Tahoma', 75))
 
             self.showMaximized()
 
@@ -100,9 +109,8 @@ class mainWindow(QMainWindow):
 def main():
         app = QApplication(sys.argv)
         win = mainWindow()
-        vbox = QVBoxLayout()
-        vbox.addWidget(win.groupBox)
-        win.setLayout(vbox)    
+        hbox = QHBoxLayout()
+    
         win.show()
         sys.exit(app.exec_())
 main()
