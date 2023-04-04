@@ -3,6 +3,9 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5 import Qt
 from PyQt5.QtCore import Qt
+import cardClass
+
+global test
 
 class caCard(QtWidgets.QWidget):
 
@@ -12,16 +15,17 @@ class caCard(QtWidgets.QWidget):
 		self.setLayout(self.layout)
 		self.setFixedSize(500,500)
 		#eventDetails = []
-		eventName = QLineEdit()
+		self.eventName = QLineEdit()
+		self.date = QLineEdit()
+		self.time = QLineEdit()
+		self.location = QLineEdit()
+		self.caName = QLineEdit()
 
-		self.layout.addRow("Event Name:", eventName)
-		self.layout.addRow("Date:", QLineEdit())
-		self.layout.addRow("Time:", QLineEdit())
-		self.layout.addRow("Location:", QLineEdit())
-		self.layout.addRow("CA Name:", QLineEdit())
-
-		#eventDetails = [eventName.text()]
-		#self.keyPressEvent() 
+		self.layout.addRow("Event Name:", self.eventName)
+		self.layout.addRow("Date:", self.date)
+		self.layout.addRow("Time:", self.time)
+		self.layout.addRow("Location:", self.location)
+		self.layout.addRow("CA Name:", self.caName)
 
 		self.createButtons()
 
@@ -38,13 +42,26 @@ class caCard(QtWidgets.QWidget):
 		self.cancelBtn.setText('Cancel')
 		self.cancelBtn.clicked.connect(self.cancel)
 
-
-	def keyPressEvent(self, event):
-		eventName = QLineEdit()
-		if (event.key() == Qt.Key.Key_Return) or (event.key() == Qt.Key.Key_Enter):
-			return eventName.text()
 	
-	#def save():
+	def save(self):
+		eName = self.eventName.text()
+		eDate = self.date.text()
+		eTime = self.time.text()
+		eLocation = self.location.text()
+		eCA = self.caName.text()
+
+		event = "{eventName} {eventDate} @ {eventTime}".format(eventName = eName, eventDate = eDate, eventTime = eTime)
+
+		self.newButton = QPushButton(event, self)
+		self.newButton.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
+		self.newButton.setMinimumHeight(400)
+		self.newButton.setMinimumWidth(100)
+
+		eventCreated = cardClass.Card() #backend save
+
+		return self.newButton
+
+
 		
 
 	def cancel(self):

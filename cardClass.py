@@ -1,3 +1,11 @@
+import mysql.connector
+
+connection = mysql.connector.connect(host='localhost',
+                                         database='Res Bulletin',
+                                         user='root')
+cursor = connection.cursor()
+
+
 
 class Card:
 

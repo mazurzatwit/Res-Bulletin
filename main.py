@@ -99,6 +99,9 @@ class mainWindow(QWidget):
             self.createButton.resize(150,50)
             self.createButton.setFont(QFont('Tahoma', 25))
 
+            #self.gridLayout.addWidget(QPushButton(self.getNewButton), 1,0)
+
+
             self.logo = QLabel(self)
             pixmap = QPixmap('Res_Logo.jpg')
             self.logo.resize(100,100)
@@ -107,7 +110,7 @@ class mainWindow(QWidget):
             self.appName = QLabel('Residential Hall Event Bulletin', self)
             self.appName.resize(1000,100)
             self.appName.move(150, 0)
-            self.appName.setFont(QFont('Abril Fatface', 75))
+            self.appName.setFont(QFont('Tahoma', 75))
 
             self.welcome = QLabel(self)
             message = "Welcome {name}".format(name = row[0])
@@ -126,15 +129,18 @@ class mainWindow(QWidget):
             self.dropdown1.resize(150,50)
             self.dropdown1.setStyleSheet("background: #FFFFFF")
 
+            #print(createForm.test)
+
             self.showMaximized()
 
         def createNewEvent(self):
             self.newEvent = createForm.caCard()
+            self.savedButton = self.newEvent.save()
                 
 def main():
         app = QApplication(sys.argv)
         win = mainWindow()
-        grid = QGridLayout(win)
+        #grid = QGridLayout(win)
     
         win.show()
         sys.exit(app.exec_())
