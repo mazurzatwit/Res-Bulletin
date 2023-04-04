@@ -37,7 +37,7 @@ finally:
         print("MySQL connection is closed")
 
 
-class mainWindow(QMainWindow):
+class mainWindow(QWidget):
 	
         def __init__(self):
             super(mainWindow, self).__init__()
@@ -47,23 +47,31 @@ class mainWindow(QMainWindow):
             
             
             self.groupBox = QGroupBox ("Events")
-            gridLayout = QtWidgets.QGridLayout()
+            self.gridLayout = QtWidgets.QGridLayout(self)
 
             self.button = QPushButton("Mocktails! 3/21/23 @ 7pm", self)
-            self.button.setMinimumHeight(30)
-            gridLayout.addWidget(self.button, 0,0)
+            self.button.setMinimumHeight(400)
+            self.button.setMinimumWidth(100)
+            self.button.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
+            self.gridLayout.addWidget(self.button, 0,0)
 
-            self.button1 = QPushButton("Mocktails! 3/21/23 @ 7pm", self)
-            self.button1.setMinimumHeight(30)
-            gridLayout.addWidget(self.button1, 0,1)
+            self.button1 = QPushButton("Free Pizza! 1/12/23 @ 5pm", self)
+            self.button1.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
+            self.button1.setMinimumHeight(400)
+            self.button1.setMinimumWidth(100)
+            self.gridLayout.addWidget(self.button1, 0,1)
 
-            self.button2 = QPushButton("Mocktails! 3/21/23 @ 7pm", self)
-            self.button2.setMinimumHeight(30)
-            gridLayout.addWidget(self.button2, 1,0)
+            self.button2 = QPushButton("Destress Fest! 4/11/23 @ 3pm", self)
+            self.button2.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
+            self.button2.setMinimumHeight(400)
+            self.button2.setMinimumWidth(100)
+            self.gridLayout.addWidget(self.button2, 0,2)
 
-            self.button3 = QPushButton("Mocktails! 3/21/23 @ 7pm", self)
-            self.button3.setMinimumHeight(30)
-            gridLayout.addWidget(self.button3, 1,1)
+            self.button3 = QPushButton("Herb Plant Night! 4/5/23 @ 6pm", self)
+            self.button3.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
+            self.button3.setMinimumHeight(400)
+            self.button3.setMinimumWidth(100)
+            self.gridLayout.addWidget(self.button3, 0,3)
 
             #self.groupBox.setLayout(gridLayout)
 
@@ -95,26 +103,26 @@ class mainWindow(QMainWindow):
             pixmap = QPixmap('Res_Logo.jpg')
             self.logo.resize(100,100)
             self.logo.setPixmap(pixmap.scaled(100,100))
-            #logo.move(0,0)
 
             self.appName = QLabel('Residential Hall Event Bulletin', self)
             self.appName.resize(1000,100)
             self.appName.move(150, 0)
-            self.appName.setFont(QFont('Tahoma', 75))
+            self.appName.setFont(QFont('Abril Fatface', 75))
 
             self.welcome = QLabel(self)
             message = "Welcome {name}".format(name = row[0])
             self.welcome.setText(message)
-            self.welcome.resize(1000,100)
-            self.welcome.move(1400,25)
-            self.welcome.setFont(QFont('Tahoma', 50))
+            self.welcome.resize(900,100)
+            self.welcome.move(1450,5)
+            self.welcome.setFont(QFont('Tahoma', 30))
 
             self.dropdown1 = QComboBox(self)
-            self.dropdown1.addItem('One')
-            self.dropdown1.addItem('Two')
-            self.dropdown1.addItem('Three')
-            self.dropdown1.addItem('Four')
-            self.dropdown1.move(1750, 25)
+            menuPix = QPixmap('menuIcon.png')
+            self.dropdown1.addItem(QIcon(menuPix.scaled(100,100)), 'Menu')
+            self.dropdown1.addItem('Switch User')
+            self.dropdown1.addItem('Account Settings')
+            self.dropdown1.addItem('Logout')
+            self.dropdown1.move(1800, 25)
             self.dropdown1.resize(150,50)
             self.dropdown1.setStyleSheet("background: #FFFFFF")
 
