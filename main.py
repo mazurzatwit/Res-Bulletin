@@ -43,11 +43,11 @@ class mainWindow(QMainWindow):
             super(mainWindow, self).__init__()
             self.setStyleSheet("background: #FDFD96")
             self.setWindowTitle("Residential Hall Event Bulletin")
-            #self.layout = QtWidgets.QGridLayout()
+            #self.layout = QtWidgets.QGridLayout(mainWindow)
             
             
             self.groupBox = QGroupBox ("Events")
-            gridLayout = QGridLayout()
+            gridLayout = QtWidgets.QGridLayout()
 
             self.button = QPushButton("Mocktails! 3/21/23 @ 7pm", self)
             self.button.setMinimumHeight(30)
@@ -65,7 +65,7 @@ class mainWindow(QMainWindow):
             self.button3.setMinimumHeight(30)
             gridLayout.addWidget(self.button3, 1,1)
 
-            self.groupBox.setLayout(gridLayout)
+            #self.groupBox.setLayout(gridLayout)
 
             #events = ['Mocktails! 3/21/23 @ 7pm', 'Free Pizza! 1/12/23 @ 5pm', 'Destress Fest! 4/11/23 @ 3pm', 'Herb Plant Night! 4/5/23 @ 6pm']
             
@@ -84,7 +84,8 @@ class mainWindow(QMainWindow):
             #self.setLayout(self.layout)
             self.createButton = QtWidgets.QPushButton(self)
             self.createButton.setText('Create')
-            self.createButton.setStyleSheet("background: #FF6962")
+            #self.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
+            self.createButton.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FF6962")
             self.createButton.clicked.connect(self.createNewEvent)
             self.createButton.move(1200,25)
             self.createButton.resize(150,50)
@@ -101,6 +102,22 @@ class mainWindow(QMainWindow):
             self.appName.move(150, 0)
             self.appName.setFont(QFont('Tahoma', 75))
 
+            self.welcome = QLabel(self)
+            message = "Welcome {name}".format(name = row[0])
+            self.welcome.setText(message)
+            self.welcome.resize(1000,100)
+            self.welcome.move(1400,25)
+            self.welcome.setFont(QFont('Tahoma', 50))
+
+            self.dropdown1 = QComboBox(self)
+            self.dropdown1.addItem('One')
+            self.dropdown1.addItem('Two')
+            self.dropdown1.addItem('Three')
+            self.dropdown1.addItem('Four')
+            self.dropdown1.move(1750, 25)
+            self.dropdown1.resize(150,50)
+            self.dropdown1.setStyleSheet("background: #FFFFFF")
+
             self.showMaximized()
 
         def createNewEvent(self):
@@ -109,7 +126,7 @@ class mainWindow(QMainWindow):
 def main():
         app = QApplication(sys.argv)
         win = mainWindow()
-        hbox = QHBoxLayout()
+        grid = QGridLayout(win)
     
         win.show()
         sys.exit(app.exec_())
