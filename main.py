@@ -37,6 +37,13 @@ finally:
         print("MySQL connection is closed")
 
 
+class createWindow(QWidget):
+     
+        def __init__(self):
+            super().__init__()
+            self.newEvent = createForm.caCard()
+            self.newEvent.save()
+
 class mainWindow(QWidget):
 	
         def __init__(self):
@@ -72,8 +79,16 @@ class mainWindow(QWidget):
             self.button3.setMinimumHeight(400)
             self.button3.setMinimumWidth(100)
             self.gridLayout.addWidget(self.button3, 0,3)
+            
+            
+            #eventDetails = createForm.eventInfo
 
-            #self.groupBox.setLayout(gridLayout)
+            #event = "{eventName} {eventDate} @ {eventTime}".format(eventName = eventDetails[0], eventDate = eventDetails[1], eventTime = eventDetails[2])
+
+            #self.newButton = QPushButton(event, self)
+            #self.newButton.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
+            #self.newButton.setMinimumHeight(400)
+            #self.newButton.setMinimumWidth(100)
 
             #events = ['Mocktails! 3/21/23 @ 7pm', 'Free Pizza! 1/12/23 @ 5pm', 'Destress Fest! 4/11/23 @ 3pm', 'Herb Plant Night! 4/5/23 @ 6pm']
             
@@ -88,19 +103,14 @@ class mainWindow(QWidget):
                     #continue
                 #button = QPushButton(event)
                 #self.layout.addWidget(button, *position)
-            
-            #self.setLayout(self.layout)
+
             self.createButton = QtWidgets.QPushButton(self)
             self.createButton.setText('Create')
-            #self.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
             self.createButton.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FF6962")
-            self.createButton.clicked.connect(self.createNewEvent)
+            self.createButton.clicked.connect(self.showCreateWindow)
             self.createButton.move(1200,25)
             self.createButton.resize(150,50)
             self.createButton.setFont(QFont('Tahoma', 25))
-
-            #self.gridLayout.addWidget(QPushButton(self.getNewButton), 1,0)
-
 
             self.logo = QLabel(self)
             pixmap = QPixmap('Res_Logo.jpg')
@@ -129,18 +139,17 @@ class mainWindow(QWidget):
             self.dropdown1.resize(150,50)
             self.dropdown1.setStyleSheet("background: #FFFFFF")
 
-            #print(createForm.test)
 
             self.showMaximized()
+        
+        def showCreateWindow(self):
+             self.newWindow = createWindow()
+             
 
-        def createNewEvent(self):
-            self.newEvent = createForm.caCard()
-            self.savedButton = self.newEvent.save()
                 
 def main():
         app = QApplication(sys.argv)
         win = mainWindow()
-        #grid = QGridLayout(win)
     
         win.show()
         sys.exit(app.exec_())

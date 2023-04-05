@@ -5,7 +5,6 @@ from PyQt5 import Qt
 from PyQt5.QtCore import Qt
 import cardClass
 
-global test
 
 class caCard(QtWidgets.QWidget):
 
@@ -14,7 +13,6 @@ class caCard(QtWidgets.QWidget):
 		self.layout = QtWidgets.QFormLayout()
 		self.setLayout(self.layout)
 		self.setFixedSize(500,500)
-		#eventDetails = []
 		self.eventName = QLineEdit()
 		self.date = QLineEdit()
 		self.time = QLineEdit()
@@ -32,8 +30,6 @@ class caCard(QtWidgets.QWidget):
 		self.show()
 
 	def createButtons(self):
-		self.buttonsLayout = QHBoxLayout()
-
 		self.saveBtn = QtWidgets.QPushButton(self)
 		self.saveBtn.move(150,200)
 		self.cancelBtn = QtWidgets.QPushButton(self)
@@ -41,6 +37,7 @@ class caCard(QtWidgets.QWidget):
 		self.saveBtn.setText('Save')
 		self.cancelBtn.setText('Cancel')
 		self.cancelBtn.clicked.connect(self.cancel)
+		self.saveBtn.clicked.connect(self.save)
 
 	
 	def save(self):
@@ -50,19 +47,13 @@ class caCard(QtWidgets.QWidget):
 		eLocation = self.location.text()
 		eCA = self.caName.text()
 
-		event = "{eventName} {eventDate} @ {eventTime}".format(eventName = eName, eventDate = eDate, eventTime = eTime)
+		eventInfo = [eName, eDate, eTime, eLocation, eCA]
+		print(eventInfo)
 
-		self.newButton = QPushButton(event, self)
-		self.newButton.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
-		self.newButton.setMinimumHeight(400)
-		self.newButton.setMinimumWidth(100)
 
 		eventCreated = cardClass.Card() #backend save
 
-		return self.newButton
 
-
-		
 
 	def cancel(self):
 		self.close()
