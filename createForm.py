@@ -18,6 +18,7 @@ class caCard(QtWidgets.QWidget):
 		self.time = QLineEdit()
 		self.location = QLineEdit()
 		self.caName = QLineEdit()
+		
 
 		self.layout.addRow("Event Name:", self.eventName)
 		self.layout.addRow("Date:", self.date)
@@ -39,6 +40,7 @@ class caCard(QtWidgets.QWidget):
 		self.cancelBtn.clicked.connect(self.cancel)
 		self.saveBtn.clicked.connect(self.save)
 
+
 	
 	def save(self):
 		eName = self.eventName.text()
@@ -50,9 +52,10 @@ class caCard(QtWidgets.QWidget):
 		eventInfo = [eName, eDate, eTime, eLocation, eCA]
 		print(eventInfo)
 
-
 		eventCreated = cardClass.Card() #backend save
+		eventCreated.create(eName,eDate,eTime,eLocation,eCA)
 
+		
 
 
 	def cancel(self):

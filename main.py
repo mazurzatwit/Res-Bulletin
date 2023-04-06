@@ -4,37 +4,29 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 import createForm
 import mysql.connector
-from mysql.connector import Error
 
 #mySQL connection starts
-try:
-    connection = mysql.connector.connect(host='localhost',
+
+connection = mysql.connector.connect(host='localhost',
                                          database='Res Bulletin',
                                          user='root')
-    if connection.is_connected():
-        db_Info = connection.get_server_info()
-        print("Connected to MySQL Server version ", db_Info)
-        cursor = connection.cursor()
-        cursor.execute("select database();")
-        record = cursor.fetchone()
-        print("You're connected to database: ", record)
+if connection.is_connected():
+    db_Info = connection.get_server_info()
+    print("Connected to MySQL Server version ", db_Info)
+    cursor = connection.cursor()
+    cursor.execute("select database();")
+    record = cursor.fetchone()
+    print("You're connected to database: ", record)
 
-        user_permissions = "SELECT User_Name_ID FROM `users` where Permissions = 'Yes';"
-        cursor = connection.cursor()
-        cursor.execute(user_permissions)
-        # get all records
-        records = cursor.fetchall()
+    user_permissions = "SELECT User_Name_ID FROM `users` where Permissions = 'Yes';"
+    cursor = connection.cursor()
+    cursor.execute(user_permissions)
+    # get all records
+    records = cursor.fetchall()
 
-        for row in records:
-            print("CA Name = ", row[0], )
+    for row in records:
+        print("CA Name = ", row[0])
 
-except Error as e:
-    print("Error while connecting to MySQL", e)
-finally:
-    if connection.is_connected():
-        cursor.close()
-        connection.close()
-        print("MySQL connection is closed")
 
 
 class createWindow(QWidget):
@@ -56,7 +48,20 @@ class mainWindow(QWidget):
             self.groupBox = QGroupBox ("Events")
             self.gridLayout = QtWidgets.QGridLayout(self)
 
-            self.button = QPushButton("Mocktails! 3/21/23 @ 7pm", self)
+            event1 = "SELECT Event_Name, Event_Date, Event_Time FROM `Test` WHERE Event_Name = 'DeStress Fest';"
+            cursor = connection.cursor()
+            cursor.execute(event1)
+            # get all records
+            records = cursor.fetchall()
+
+            for row in records:
+                  eName = row[0]
+                  eDate = row[1]
+                  eTime = row[2]
+
+            event = "{eventName} {eventDate} @ {eventTime}".format(eventName = eName, eventDate = eDate, eventTime = eTime)
+
+            self.button = QPushButton(event, self)
             self.button.setMinimumHeight(400)
             self.button.setMinimumWidth(100)
             self.button.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
@@ -154,7 +159,9 @@ def main():
         win.show()
         sys.exit(app.exec_())
 main()
-		
+
+cursor.close()
+connection.close()
 
 
     
