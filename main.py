@@ -24,8 +24,8 @@ if connection.is_connected():
     # get all records
     records = cursor.fetchall()
 
-    for row in records:
-        print("CA Name = ", row[0])
+    for rows in records:
+        print("CA Name = ", rows[0])
 
 
 
@@ -128,7 +128,7 @@ class mainWindow(QWidget):
             self.appName.setFont(QFont('Tahoma', 75))
 
             self.welcome = QLabel(self)
-            message = "Welcome {name}".format(name = row[0])
+            message = "Welcome {name}".format(name = rows[0])
             self.welcome.setText(message)
             self.welcome.resize(900,100)
             self.welcome.move(1450,5)

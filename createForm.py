@@ -1,7 +1,7 @@
 import sys
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
-from PyQt5 import Qt
+from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
 import cardClass
 
@@ -38,7 +38,12 @@ class caCard(QtWidgets.QWidget):
 		self.saveBtn.setText('Save')
 		self.cancelBtn.setText('Cancel')
 		self.cancelBtn.clicked.connect(self.cancel)
+		self.saveBtn.clicked.connect(self.showSavePopUp)
 		self.saveBtn.clicked.connect(self.save)
+		#QtCore.QObject.connect(self.saveBtn, QtCore.SIGNAL('clicked()'), self.showSavePopUp)
+		#QtCore.QObject.connect(self.saveBtn, QtCore.SIGNAL('clicked()'), self.save)
+
+
 
 
 	
@@ -55,7 +60,19 @@ class caCard(QtWidgets.QWidget):
 		eventCreated = cardClass.Card() #backend save
 		eventCreated.create(eName,eDate,eTime,eLocation,eCA)
 
+	def showSavePopUp(self):
+		msg=QMessageBox()
+		msg.setWindowTitle("Save")
+		msg.setText("Confirm save of event information?")
+		msg.setIcon(QMessageBox.Information)
+		msg.setStandardButtons(QMessageBox.Save|QMessageBox.Cancel)
+
+		msg.buttonClicked.connect(self.savePopUp)
 		
+		show = msg.exec()		
+
+	def savePopUp(self, i):
+		self.close()
 
 
 	def cancel(self):
