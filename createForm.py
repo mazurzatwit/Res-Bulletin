@@ -43,10 +43,6 @@ class caCard(QtWidgets.QWidget):
 		#QtCore.QObject.connect(self.saveBtn, QtCore.SIGNAL('clicked()'), self.showSavePopUp)
 		#QtCore.QObject.connect(self.saveBtn, QtCore.SIGNAL('clicked()'), self.save)
 
-
-
-
-	
 	def save(self):
 		eName = self.eventName.text()
 		eDate = self.date.text()
@@ -57,8 +53,8 @@ class caCard(QtWidgets.QWidget):
 		eventInfo = [eName, eDate, eTime, eLocation, eCA]
 		print(eventInfo)
 
-		eventCreated = cardClass.Card() #backend save
-		eventCreated.create(eName,eDate,eTime,eLocation,eCA)
+		self.eventCreated = cardClass.Card() #backend save
+		self.eventCreated.create(eName,eDate,eTime,eLocation,eCA)
 
 	def showSavePopUp(self):
 		msg=QMessageBox()
@@ -69,7 +65,7 @@ class caCard(QtWidgets.QWidget):
 
 		msg.buttonClicked.connect(self.savePopUp)
 		
-		show = msg.exec()		
+		msg.exec()		
 
 	def savePopUp(self, i):
 		self.close()
@@ -77,6 +73,8 @@ class caCard(QtWidgets.QWidget):
 
 	def cancel(self):
 		self.close()
+
+	
 
 
 		

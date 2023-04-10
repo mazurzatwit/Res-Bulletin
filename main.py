@@ -1,8 +1,10 @@
 import sys
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QInputDialog
 from PyQt5.QtGui import *
 import createForm
+import cardClass
 import mysql.connector
 
 #mySQL connection starts
@@ -48,7 +50,7 @@ class mainWindow(QWidget):
             self.groupBox = QGroupBox ("Events")
             self.gridLayout = QtWidgets.QGridLayout(self)
 
-            event1 = "SELECT Event_Name, Event_Date, Event_Time FROM `Test` WHERE Event_Name = 'DeStress Fest';"
+            event1 = "SELECT Event_Name, Event_Date, Event_Time FROM `ca_event` WHERE Event_Name = 'Grocery Bingo';"
             cursor = connection.cursor()
             cursor.execute(event1)
             # get all records
@@ -113,9 +115,17 @@ class mainWindow(QWidget):
             self.createButton.setText('Create')
             self.createButton.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FF6962")
             self.createButton.clicked.connect(self.showCreateWindow)
-            self.createButton.move(1200,25)
-            self.createButton.resize(150,50)
+            self.createButton.move(1150,25)
+            self.createButton.resize(100,50)
             self.createButton.setFont(QFont('Tahoma', 25))
+
+            self.deleteButton = QtWidgets.QPushButton(self)
+            self.deleteButton.setText('Delete')
+            self.deleteButton.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FF6962")
+            self.deleteButton.clicked.connect(self.delete)
+            self.deleteButton.move(1300,25)
+            self.deleteButton.resize(100,50)
+            self.deleteButton.setFont(QFont('Tahoma', 25))
 
             self.logo = QLabel(self)
             pixmap = QPixmap('Res_Logo.jpg')
@@ -149,7 +159,22 @@ class mainWindow(QWidget):
         
         def showCreateWindow(self):
              self.newWindow = createWindow()
+
+        def delete(self):
+            text, ok = QInputDialog.getText(self, "Delete", "Enter Event Name to delete: " )	
              
+            if ok:
+                input = str(text)
+                deleteEvent = "SELECT Event_Name FROM `ca_event` WHERE Event_Name = ('%s')" % (input)
+                cursor = connection.cursor()
+                cursor.execute(deleteEvent)
+                # get all records
+                deleteRecord = cursor.fetchall()
+                print(deleteRecord)
+            
+            self.deleteEvent = cardClass.Card() #backend delete
+            self.deleteEvent.delete(input)
+
 
                 
 def main():
