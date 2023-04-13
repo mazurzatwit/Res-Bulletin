@@ -42,9 +42,9 @@ class mainWindow(QWidget):
         def __init__(self):
             super(mainWindow, self).__init__()
             self.setStyleSheet("background: #FDFD96")
-            self.setWindowTitle("Residential Hall Event Bulletin")
+            self.setWindowTitle("Residential Hall Event Bulletin - Student View")
             #self.layout = QtWidgets.QGridLayout(mainWindow)
-            
+            self.setGeometry(500,1000,1100,1000)
             
             self.groupBox = QGroupBox ("Events")
             self.gridLayout = QtWidgets.QGridLayout(self)
@@ -63,7 +63,7 @@ class mainWindow(QWidget):
             event = "{eventName} {eventDate} @ {eventTime}".format(eventName = eName, eventDate = eDate, eventTime = eTime)
 
             self.button = QPushButton(event, self)
-            self.button.setMinimumHeight(400)
+            self.button.setMinimumHeight(300)
             self.button.setMinimumWidth(100)
             self.button.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
             self.button.clicked.connect(self.showEventWindow)
@@ -71,23 +71,29 @@ class mainWindow(QWidget):
 
             self.button1 = QPushButton("Free Pizza! 1/12/23 @ 5pm", self)
             self.button1.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
-            self.button1.setMinimumHeight(400)
+            self.button1.setMinimumHeight(300)
             self.button1.setMinimumWidth(100)
             self.gridLayout.addWidget(self.button1, 0,1)
 
             self.button2 = QPushButton("Destress Fest! 4/11/23 @ 3pm", self)
             self.button2.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
-            self.button2.setMinimumHeight(400)
+            self.button2.setMinimumHeight(300)
             self.button2.setMinimumWidth(100)
             self.gridLayout.addWidget(self.button2, 0,2)
 
             self.button3 = QPushButton("Herb Plant Night! 4/5/23 @ 6pm", self)
             self.button3.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
-            self.button3.setMinimumHeight(400)
+            self.button3.setMinimumHeight(300)
             self.button3.setMinimumWidth(100)
             self.gridLayout.addWidget(self.button3, 0,3)
-            
 
+            self.button4 = QPushButton("Stuffed Animals! 4/13/23 @ 5pm", self)
+            self.button4.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
+            self.button4.setMinimumHeight(300)
+            self.button4.setMinimumWidth(100)
+            self.gridLayout.addWidget(self.button4, 2,0)
+
+            #HEADER
             self.logo = QLabel(self)
             pixmap = QPixmap('Res_Logo.jpg')
             self.logo.resize(100,100)
@@ -111,7 +117,7 @@ class mainWindow(QWidget):
             self.dropdown1.addItem('Switch User')
             self.dropdown1.addItem('Account Settings')
             self.dropdown1.addItem('Logout')
-            self.dropdown1.move(1800, 25)
+            self.dropdown1.move(1750, 25)
             self.dropdown1.resize(150,50)
             self.dropdown1.setStyleSheet("background: #FFFFFF")
 

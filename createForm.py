@@ -126,5 +126,16 @@ class studentCard(QtWidgets.QWidget):
 		self.layout.addRow("Location:", self.location)
 		self.layout.addRow("CA Name:", self.caName)
 
+		self.closeBtn = QtWidgets.QPushButton(self)
+		self.closeBtn.move(200,200)
+		self.closeBtn.setText('Close')
+		self.closeBtn.clicked.connect(self.closed)
+		
+		self.show()
+
+	def closed(self):
+		self.close()
+
+
 		
 
