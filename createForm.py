@@ -4,6 +4,12 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
 import cardClass
+import mysql.connector
+
+connection = mysql.connector.connect(host='localhost',
+                                         database='Res Bulletin',
+                                         user='root')
+cursor = connection.cursor()
 
 
 class caCard(QtWidgets.QWidget):
@@ -40,8 +46,7 @@ class caCard(QtWidgets.QWidget):
 		self.cancelBtn.clicked.connect(self.cancel)
 		self.saveBtn.clicked.connect(self.showSavePopUp)
 		self.saveBtn.clicked.connect(self.save)
-		#QtCore.QObject.connect(self.saveBtn, QtCore.SIGNAL('clicked()'), self.showSavePopUp)
-		#QtCore.QObject.connect(self.saveBtn, QtCore.SIGNAL('clicked()'), self.save)
+	
 
 	def save(self):
 		eName = self.eventName.text()
@@ -74,7 +79,52 @@ class caCard(QtWidgets.QWidget):
 	def cancel(self):
 		self.close()
 
-	
+		
+class studentCard(QtWidgets.QWidget):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.layout = QtWidgets.QFormLayout()
+		self.setLayout(self.layout)
+		self.setFixedSize(500,500)
+		self.attendance = QWidget()
+		self.layout_h = QHBoxLayout(self.attendance)
 
+
+		studentInfo = "SELECT * From Student_Card WHERE Event_Name = 'Grocery Bingo'"
+		cursor = connection.cursor()
+		cursor.execute(studentInfo)
+        # get all records
+		records = cursor.fetchall()
+
+		for row in records:
+			ename = row[0]
+			edate = row[1]
+			etime = row[2]
+			elocation = row[3]
+			eCA = row[4]
+			eYes = row[5]
+			eMaybe = row[6]
+			eNo = row[7]
+			eForum = row[8]
+		
+		self.eventName = QLabel(ename)
+		self.date = QLabel(edate)
+		self.time = QLabel(etime)
+		self.location = QLabel(elocation)
+		self.caName = QLabel(eCA)
+		self.yes = QLabel(eYes)
+		self.no = QLabel(eNo)
+		self.maybe = QLabel(eMaybe)
+
+		self.layout_h.addWidget(self.yes)
+		self.layout_h.addWidget(self.no)
+		self.layout_h.addWidget(self.maybe)
+
+		self.layout.addRow("Event Name:", self.eventName)
+		self.layout.addRow("Date:", self.date)
+		self.layout.addRow("Time:", self.time)
+		self.layout.addRow("Location:", self.location)
+		self.layout.addRow("CA Name:", self.caName)
 
 		
+

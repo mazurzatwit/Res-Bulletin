@@ -33,8 +33,6 @@ class Card:
 
         connection.commit()
 
-        #cursor.close()
-        #connection.close()
 
     #def edit(self, card): #Need help implementing
 

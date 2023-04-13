@@ -20,23 +20,22 @@ if connection.is_connected():
     record = cursor.fetchone()
     print("You're connected to database: ", record)
 
-    user_permissions = "SELECT User_Name_ID FROM `users` where Permissions = 'Yes';"
+    user_permissions = "SELECT User_Name_ID FROM `users` where Permissions = 'No';"
     cursor = connection.cursor()
     cursor.execute(user_permissions)
     # get all records
     records = cursor.fetchall()
 
     for rows in records:
-        print("CA Name = ", rows[0])
+        print("Student Name = ", rows[0])
 
 
 
-class createWindow(QWidget):
+class eventWindow(QWidget):
      
         def __init__(self):
             super().__init__()
-            self.newEvent = createForm.caCard()
-            self.newEvent.save()
+            self.newEvent = createForm.studentCard()
 
 class mainWindow(QWidget):
 	
@@ -67,6 +66,7 @@ class mainWindow(QWidget):
             self.button.setMinimumHeight(400)
             self.button.setMinimumWidth(100)
             self.button.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FFB346")
+            self.button.clicked.connect(self.showEventWindow)
             self.gridLayout.addWidget(self.button, 0,0)
 
             self.button1 = QPushButton("Free Pizza! 1/12/23 @ 5pm", self)
@@ -88,22 +88,6 @@ class mainWindow(QWidget):
             self.gridLayout.addWidget(self.button3, 0,3)
             
 
-            self.createButton = QtWidgets.QPushButton(self)
-            self.createButton.setText('Create')
-            self.createButton.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FF6962")
-            self.createButton.clicked.connect(self.showCreateWindow)
-            self.createButton.move(1150,25)
-            self.createButton.resize(100,50)
-            self.createButton.setFont(QFont('Tahoma', 25))
-
-            self.deleteButton = QtWidgets.QPushButton(self)
-            self.deleteButton.setText('Delete')
-            self.deleteButton.setStyleSheet("background: #FFFFFF; border-style: solid; border-width: 4px; border-color: #FF6962")
-            self.deleteButton.clicked.connect(self.delete)
-            self.deleteButton.move(1300,25)
-            self.deleteButton.resize(100,50)
-            self.deleteButton.setFont(QFont('Tahoma', 25))
-
             self.logo = QLabel(self)
             pixmap = QPixmap('Res_Logo.jpg')
             self.logo.resize(100,100)
@@ -118,7 +102,7 @@ class mainWindow(QWidget):
             message = "Welcome {name}".format(name = rows[0])
             self.welcome.setText(message)
             self.welcome.resize(900,100)
-            self.welcome.move(1450,5)
+            self.welcome.move(1300,5)
             self.welcome.setFont(QFont('Tahoma', 30))
 
             self.dropdown1 = QComboBox(self)
@@ -134,23 +118,9 @@ class mainWindow(QWidget):
 
             self.showMaximized()
         
-        def showCreateWindow(self):
-             self.newWindow = createWindow()
+        def showEventWindow(self):
+             self.newWindow = eventWindow()
 
-        def delete(self):
-            text, ok = QInputDialog.getText(self, "Delete", "Enter Event Name to delete: " )	
-             
-            if ok:
-                input = str(text)
-                deleteEvent = "SELECT Event_Name FROM `ca_event` WHERE Event_Name = ('%s')" % (input)
-                cursor = connection.cursor()
-                cursor.execute(deleteEvent)
-                # get all records
-                deleteRecord = cursor.fetchall()
-                print(deleteRecord)
-            
-            self.deleteEvent = cardClass.Card() #backend delete
-            self.deleteEvent.delete(input)
 
 
                 
