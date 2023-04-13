@@ -1,5 +1,10 @@
 # Res-Bulletin
 
+
+##Description
+
+Residential Hall Event Bulletin is an app that will help improve Community Advisor (CA) events on campus. At some point during our time at Wentworth, we’ve all seen a poster or two advertising either a housing event or on- campus community event. The attendance at these events are minimal which results in wasted supplies, loss of money, and time. The system proposed will address these problems and combat them, while improving the Wentworth community.
+
 ##Installation
 
 1) Clone Res Bulletin repository using the following command: 
