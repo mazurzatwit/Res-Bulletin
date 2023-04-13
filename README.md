@@ -1,5 +1,15 @@
 # Res-Bulletin
 
+##Installation
+
+1) Clone Res Bulletin repository using the following command: 
+   git clone https://github.com/mazurzatwit/Res-Bulletin.git  
+2) Set up database using the _.sql file on a preferred MySQL server
+3) Open up python file in preferred Python3 IDE
+4) From main.py, run the program to launch GUI
+
+
+
 ##License
 MIT License
 
