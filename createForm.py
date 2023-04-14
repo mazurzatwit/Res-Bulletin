@@ -126,10 +126,18 @@ class studentCard(QtWidgets.QWidget):
 		self.layout.addRow("Location:", self.location)
 		self.layout.addRow("CA Name:", self.caName)
 
+		self.rating = QLineEdit()
+		self.rating.setPlaceholderText("Enter a number:")
+		self.comment = QLineEdit()
+		self.comment.setPlaceholderText("Enter a comment:")
+		self.layout.addRow("Rating (Scale: 1-5): ", self.rating)
+		self.layout.addRow("Comment: ", self.comment)
+	
 		self.closeBtn = QtWidgets.QPushButton(self)
-		self.closeBtn.move(200,200)
+		self.closeBtn.move(200,250)
 		self.closeBtn.setText('Close')
 		self.closeBtn.clicked.connect(self.closed)
+		
 		
 		self.show()
 

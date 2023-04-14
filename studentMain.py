@@ -44,8 +44,15 @@ class mainWindow(QWidget):
             self.setStyleSheet("background: #FDFD96")
             self.setWindowTitle("Residential Hall Event Bulletin - Student View")
             #self.layout = QtWidgets.QGridLayout(mainWindow)
+            #setGeometry(left,top,width,height)
             self.setGeometry(500,1000,1100,1000)
             
+            #SCROLL
+            #self.scroll = QScrollBar(self)
+            #self.scroll
+            #self.scroll.setMaximum(1000)
+        
+
             self.groupBox = QGroupBox ("Events")
             self.gridLayout = QtWidgets.QGridLayout(self)
 
@@ -126,10 +133,7 @@ class mainWindow(QWidget):
         
         def showEventWindow(self):
              self.newWindow = eventWindow()
-
-
-
-                
+   
 def main():
         app = QApplication(sys.argv)
         win = mainWindow()
